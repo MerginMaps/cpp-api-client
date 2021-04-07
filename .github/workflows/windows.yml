@@ -84,7 +84,7 @@ jobs:
         shell: cmd
         run: |
           cd rel
-          mergin --help
+          start mergin.exe --help
 
       - name: archive release mergin
         uses: actions/upload-artifact@v2
