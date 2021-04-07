@@ -55,8 +55,8 @@ jobs:
           cd build-geodiff
 
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          exec { cmake -DBUILD_STATIC=TRUE -DENABLE_TESTS=FALSE ..\geodiff\geodiff }
-          exec { cmake --build . --config Release }
+          cmake -DBUILD_STATIC=TRUE -DENABLE_TESTS=FALSE ..\geodiff\geodiff
+          cmake --build . --config Release
 
       - name: build mergin-cpp-client
         shell: pwsh
@@ -66,5 +66,5 @@ jobs:
           cd build-mergin-cpp-client
 
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          exec { qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static }
-          exec { nmake release }
+          qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static
+          nmake release
