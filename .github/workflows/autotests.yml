@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Deps
         run: |
-          apt-get install cmake qt5-default libqt5network5
+          sudo apt-get install cmake qt5-default libqt5network5
 
       - name: build geodiff
         run: |
@@ -44,7 +44,7 @@ jobs:
             ../geodiff
 
           make -j $(sysctl -n hw.ncpu)
-          make install
+          sudo make install
 
       - name: build mergin-cpp-client
         run: |
