@@ -49,22 +49,22 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.8
 
       - name: build geodiff
-        shell: pwsh
+        shell: cmd
         run: |
-          if(-Not (Test-Path -Path build-geodiff)) { mkdir build-geodiff }
+          mkdir build-geodiff
           cd build-geodiff
 
-          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           cmake -DBUILD_STATIC=TRUE -DENABLE_TESTS=FALSE ..\geodiff\geodiff
           cmake --build . --config Release
 
       - name: build mergin-cpp-client
-        shell: pwsh
+        shell: cmd
         run: |
-          Copy-Item mergin-cpp-client\scripts\ci\config.pri mergin-cpp-client\src\config.pri
-          if(-Not (Test-Path -Path build-mergin-cpp-client)) { mkdir build-mergin-cpp-client }
+          copy mergin-cpp-client\scripts\ci\config.pri mergin-cpp-client\src\config.pri
+          mkdir build-mergin-cpp-client
           cd build-mergin-cpp-client
 
-          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static
           nmake release
