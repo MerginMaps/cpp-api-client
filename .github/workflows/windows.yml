@@ -74,8 +74,8 @@ jobs:
         run: |
           mkdir rel
           cd rel
-          copy build-mergin-cpp-client\release\mergin.exe mergin.exe
-          copy build-geodiff\Release\geodiff.dll geodiff.dll
+          copy ..\build-mergin-cpp-client\release\mergin.exe mergin.exe
+          copy ..\build-geodiff\Release\geodiff.dll geodiff.dll
           windeployqt --release --verbose 2 mergin.exe
 
       - name: run mergin tests
