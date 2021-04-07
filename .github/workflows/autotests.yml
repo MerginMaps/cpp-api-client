@@ -20,7 +20,7 @@ jobs:
       - name: Checkout input
         uses: actions/checkout@v2
         with:
-          repository: lutraconsulting/input
+          repository: https://github.com/lutraconsulting/input.git
           ref: ${INPUT_BRANCH}
           path: input
 
@@ -28,13 +28,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${GEODIFF_BRANCH}
-          repository: lutraconsulting/geodiff
+          repository: https://github.com/lutraconsulting/geodiff.git
           path: geodiff
 
       - name: Install Deps
         run: |
           apt-get install cmake qt5-default libqt5network5
-          
+
       - name: build geodiff
         run: |
           mkdir -p build-geodiff
