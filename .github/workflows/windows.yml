@@ -56,7 +56,7 @@ jobs:
         shell: pwsh
         run: |
           Copy-Item mergin-cpp-client\scripts\ci\config.pri mergin-cpp-client\src\config.pri
-          if(-Not (Test-Path -Path build-geodiff)) { mkdir build-mergin-cpp-client }
+          if(-Not (Test-Path -Path build-mergin-cpp-client)) { mkdir build-mergin-cpp-client }
           cd build-mergin-cpp-client
 
           qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release
