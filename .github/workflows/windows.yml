@@ -80,12 +80,6 @@ jobs:
           windeployqt --release mergin.exe
           dir
 
-      - name: run mergin tests
-        shell: cmd
-        run: |
-          cd rel
-          start mergin.exe --help
-
       - name: archive release mergin
         uses: actions/upload-artifact@v2
         with:
