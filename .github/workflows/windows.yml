@@ -55,7 +55,7 @@ jobs:
           cd build-geodiff
 
           call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          cmake -DBUILD_STATIC=TRUE -DENABLE_TESTS=FALSE ..\geodiff\geodiff
+          cmake -DENABLE_TESTS=FALSE ..\geodiff\geodiff
           cmake --build . --config Release
 
       - name: build mergin-cpp-client
@@ -68,9 +68,17 @@ jobs:
           call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static
           nmake release
-          dir
+
+      - name: create release folder
+        shell: cmd
+          run: |
+            mkdir rel
+            cd rel
+            copy build-mergin-cpp-client\release\mergin.exe mergin.exe
+            copy build-geodiff\Release\geodiff.dll geodiff.dll
+            windeployqt --release --verbose 2 mergin.exe
 
       - name: run mergin tests
         run: |
-          cd build-mergin-cpp-client/release
-          mergin --help
+          cd rel
+          mergin.exe --help

@@ -36,7 +36,33 @@ Commands:
 
 ### Compilation
 
-TODO
+#### Windows 
+
+For CI setup, see this [GitHub Action](.github/workflows/windows.yml)
+
+1. Install Visual Studio (At least c++ compiler)
+2. Install Qt5 (some recent version, 5.14.x or 5.15.x)
+3. Install Cmake
+4. Compile [Geodiff](https://github.com/lutraconsulting/geodiff)
+```
+ <in VS cmd>
+ git clone https://github.com/lutraconsulting/geodiff
+ cd build-geodiff
+ cmake ..\geodiff\geodiff
+ cmake --build . --config Release
+```
+5. Download Input
+```
+ git clone https://github.com/lutraconsulting/input
+ git checkout mergin_cpp
+```
+6. Compile Client
+```
+ <in VS cmd>
+ cd build-client
+ qmake ..\mergin-cpp-client\src\client.pro
+ nmake release
+```
 
 ### Tests
 TODO
