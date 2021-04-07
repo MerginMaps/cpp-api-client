@@ -7,10 +7,10 @@ QT += core network
 QT -= gui
 
 include(config.pri)
-include($${{INPUT_DIR}}/app/version.pri)
-include($${{INPUT_DIR}}/core/core.pri)
+include($${INPUT_DIR}/app/version.pri)
+include($${INPUT_DIR}/core/core.pri)
 
-INCLUDEPATH += $${{INPUT_DIR}}/core
+INCLUDEPATH += $${INPUT_DIR}/core
 
 SOURCES += \
   clientmain.cpp \

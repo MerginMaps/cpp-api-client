@@ -40,9 +40,8 @@ jobs:
         run: |
             CALL "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
 
-      - name: Install Deps
-        run: |
-          sudo apt-get install cmake qt5-default libqt5network5
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.8
 
       - name: build geodiff
         shell: pwsh
