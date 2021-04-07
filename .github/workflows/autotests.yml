@@ -1,0 +1,69 @@
+name: Auto Tests
+on: [push]
+env:
+  INPUT_BRANCH: mergin_cpp
+  GEODIFF_BRANCH: 0.8.6
+  TEST_MERGIN_URL: https://test.dev.cloudmergin.com/
+  TEST_API_USERNAME: test_inputapp
+  TEST_API_PASSWORD: ${{ secrets.MERGINTEST_API_PASSWORD }}
+
+jobs:
+  tests:
+    if: ( github.repository == 'lutraconsulting/mergin-cpp-client' )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout mergin-cpp-client
+        uses: actions/checkout@v2
+        path:
+          mergin-cpp-client
+
+      - name: Checkout input
+        uses: actions/checkout@v2
+        repository: lutraconsulting/input
+        ref: ${INPUT_BRANCH}
+        path:
+          input
+
+      - name: Checkout geodiff
+        uses: actions/checkout@v2
+        ref: ${GEODIFF_BRANCH}
+        repository: lutraconsulting/geodiff
+        path:
+          geodiff
+
+      - name: Install Deps
+        run: |
+
+
+      - name: build geodiff
+        run: |
+          mkdir -p build-geodiff
+          cd build-geodiff
+
+          cmake \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DENABLE_TESTS=FALSE \
+            -DUSE_QGIS_BUILD_DIR=FALSE \
+            -DQGIS_INSTALL_PATH=/opt/INPUT/input-sdk-mac-$SDK_VERSION/stage/mac \
+            -DQGIS_CMAKE_PATH=/opt/INPUT/input-sdk-mac-$SDK_VERSION/stage/mac/cmake \
+            ../geodiff
+
+          make -j $(sysctl -n hw.ncpu)
+          make install
+
+      - name: build mergin-cpp-client
+        run: |
+          cp mergin-cpp-client/scripts/ci/config.pri mergin-cpp-client/src/config.pri
+          mkdir -p build-mergin-cpp-client
+          cd build-mergin-cpp-client
+
+          qmake \
+            ../mergin-cpp-client/src/client.pro \
+            CONFIG+=debug
+
+          make -j $(sysctl -n hw.ncpu)
+
+      - name: run mergin tests
+        run: |
+          cd build-mergin-cpp-client/
+          ./mergin --help
