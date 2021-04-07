@@ -81,6 +81,7 @@ jobs:
           dir
 
       - name: run mergin tests
+        shell: cmd
         run: |
           cd rel
           mergin --help
