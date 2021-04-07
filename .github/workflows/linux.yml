@@ -1,4 +1,4 @@
-name: Auto Tests
+name: Linux Build
 on: [push]
 env:
   TEST_MERGIN_URL: https://test.dev.cloudmergin.com/
@@ -6,7 +6,7 @@ env:
   TEST_API_PASSWORD: ${{ secrets.MERGINTEST_API_PASSWORD }}
 
 jobs:
-  tests:
+  linux_build:
     if: ( github.repository == 'lutraconsulting/mergin-cpp-client' )
     runs-on: ubuntu-latest
     steps:
@@ -53,6 +53,7 @@ jobs:
           cd build-mergin-cpp-client
 
           qmake \
+            'QMAKE_CFLAGS_ISYSTEM=-I' \
             ../mergin-cpp-client/src/client.pro \
             CONFIG+=debug
 

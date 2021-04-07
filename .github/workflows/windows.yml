@@ -44,7 +44,6 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
-          modules: 'qtnetwork'
           arch: win64_msvc2019_64
           version: 5.14.2
 
