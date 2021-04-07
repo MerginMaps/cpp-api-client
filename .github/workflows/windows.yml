@@ -82,3 +82,11 @@ jobs:
         run: |
           cd rel
           mergin.exe --help
+
+      - name: archive release mergin
+        uses: actions/upload-artifact@v2
+        with:
+          name: mergin-cpp-client
+          path: |
+            rel
+
