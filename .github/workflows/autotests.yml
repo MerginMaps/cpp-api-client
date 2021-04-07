@@ -1,8 +1,6 @@
 name: Auto Tests
 on: [push]
 env:
-  INPUT_BRANCH: mergin_cpp
-  GEODIFF_BRANCH: 0.8.6
   TEST_MERGIN_URL: https://test.dev.cloudmergin.com/
   TEST_API_USERNAME: test_inputapp
   TEST_API_PASSWORD: ${{ secrets.MERGINTEST_API_PASSWORD }}
@@ -20,15 +18,15 @@ jobs:
       - name: Checkout input
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/lutraconsulting/input.git
-          ref: ${INPUT_BRANCH}
+          repository: lutraconsulting/input
+          ref: mergin_cpp
           path: input
 
       - name: Checkout geodiff
         uses: actions/checkout@v2
         with:
-          ref: ${GEODIFF_BRANCH}
-          repository: https://github.com/lutraconsulting/geodiff.git
+          ref: 0.8.6
+          repository: lutraconsulting/geodiff
           path: geodiff
 
       - name: Install Deps
