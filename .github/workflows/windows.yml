@@ -33,7 +33,7 @@ jobs:
           path: geodiff
 
       - name: Install Qt
-          uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v2
 
       - name: Set compiler environment
         shell: cmd
@@ -62,4 +62,3 @@ jobs:
 
           qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release
           nmake
-          

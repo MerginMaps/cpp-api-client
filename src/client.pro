@@ -6,11 +6,11 @@ CONFIG   -= app_bundle
 QT += core network
 QT -= gui
 
-INCLUDEPATH += $${{INPUT_DIR}}/core
-
 include(config.pri)
 include($${{INPUT_DIR}}/app/version.pri)
 include($${{INPUT_DIR}}/core/core.pri)
+
+INCLUDEPATH += $${{INPUT_DIR}}/core
 
 SOURCES += \
   clientmain.cpp \
