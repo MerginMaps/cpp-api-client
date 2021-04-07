@@ -4,7 +4,7 @@ This repository contains a cpp client module for access to [Mergin](https://publ
 service and a command-line tool for easy access to data stored in Mergin.
 
 [![Code Layout](https://github.com/lutraconsulting/mergin-cpp-client/workflows/Code%20Layout/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions?query=workflow%3A%22Code+Layout%22)
-
+[![Auto Tests](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/autotests.yml/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/autotests.yml)
 
 Note: Check also [Mergin Python Client](https://github.com/lutraconsulting/mergin-py-client)
 

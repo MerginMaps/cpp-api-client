@@ -14,25 +14,27 @@ jobs:
     steps:
       - name: Checkout mergin-cpp-client
         uses: actions/checkout@v2
-        path: mergin-cpp-client
+        with:
+          path: mergin-cpp-client
 
       - name: Checkout input
         uses: actions/checkout@v2
-        repository: lutraconsulting/input
-        ref: ${INPUT_BRANCH}
-        path: input
+        with:
+          repository: lutraconsulting/input
+          ref: ${INPUT_BRANCH}
+          path: input
 
       - name: Checkout geodiff
         uses: actions/checkout@v2
-        ref: ${GEODIFF_BRANCH}
-        repository: lutraconsulting/geodiff
-        path: geodiff
+        with:
+          ref: ${GEODIFF_BRANCH}
+          repository: lutraconsulting/geodiff
+          path: geodiff
 
       - name: Install Deps
         run: |
           apt-get install cmake qt5-default libqt5network5
-
-
+          
       - name: build geodiff
         run: |
           mkdir -p build-geodiff
