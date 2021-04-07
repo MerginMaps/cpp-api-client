@@ -44,7 +44,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
-          
+
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.8
 
@@ -54,7 +54,7 @@ jobs:
           if(-Not (Test-Path -Path build-geodiff)) { mkdir build-geodiff }
           cd build-geodiff
 
-          C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           exec { cmake -DBUILD_STATIC=TRUE -DENABLE_TESTS=FALSE ..\geodiff\geodiff }
           exec { cmake --build . --config Release }
 
@@ -65,6 +65,6 @@ jobs:
           if(-Not (Test-Path -Path build-mergin-cpp-client)) { mkdir build-mergin-cpp-client }
           cd build-mergin-cpp-client
 
-          C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           exec { qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static }
           exec { nmake release }
