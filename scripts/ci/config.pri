@@ -4,7 +4,7 @@ win32 {
   GEODIFF_LIB_DIR = $$PWD/../build-geodiff
 }
 
-lnx {
+unix {
   INPUT_DIR = $$PWD/../../input
   GEODIFF_INCLUDE_DIR = /usr/include
   GEODIFF_LIB_DIR = /usr/lib

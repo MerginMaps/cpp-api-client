@@ -32,13 +32,21 @@ jobs:
           repository: lutraconsulting/geodiff
           path: geodiff
 
+
+      - name: Cache Qt from qt.io
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: Windows-QtCache
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
-
-      - name: Set compiler environment
-        shell: cmd
-        run: |
-            CALL "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
+        with:
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          modules: 'qtnetwork'
+          arch: win64_msvc2019_64
+          version: 5.14.2
 
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.8
@@ -49,8 +57,9 @@ jobs:
           if(-Not (Test-Path -Path build-geodiff)) { mkdir build-geodiff }
           cd build-geodiff
 
-          cmake -DBUILD_STATIC=TRUE -DENABLE_TESTS=FALSE ..\geodiff\geodiff
-          cmake --build . --config Release
+          C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat
+          exec { cmake -DBUILD_STATIC=TRUE -DENABLE_TESTS=FALSE ..\geodiff\geodiff }
+          exec { cmake --build . --config Release }
 
       - name: build mergin-cpp-client
         shell: pwsh
@@ -59,6 +68,6 @@ jobs:
           if(-Not (Test-Path -Path build-mergin-cpp-client)) { mkdir build-mergin-cpp-client }
           cd build-mergin-cpp-client
 
-          qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static
-          nmake release
-          dir
+          C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat
+          exec { qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static }
+          exec { nmake release }
