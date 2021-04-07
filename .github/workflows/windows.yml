@@ -76,12 +76,14 @@ jobs:
           cd rel
           copy ..\build-mergin-cpp-client\release\mergin.exe mergin.exe
           copy ..\build-geodiff\Release\geodiff.dll geodiff.dll
-          windeployqt --release --verbose 2 mergin.exe
+          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          windeployqt --release mergin.exe
+          dir
 
       - name: run mergin tests
         run: |
           cd rel
-          mergin.exe --help
+          mergin --help
 
       - name: archive release mergin
         uses: actions/upload-artifact@v2
