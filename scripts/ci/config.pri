@@ -1,7 +1,7 @@
 win32 {
   INPUT_DIR = $$PWD/../../input
   GEODIFF_INCLUDE_DIR = $$PWD/../../geodiff/geodiff/src
-  GEODIFF_LIB_DIR = $$PWD/../../build-geodiff
+  GEODIFF_LIB_DIR = $$PWD/../../build-geodiff/Release
 }
 
 unix {
