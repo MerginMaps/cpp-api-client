@@ -62,4 +62,4 @@ jobs:
       - name: run mergin tests
         run: |
           cd build-mergin-cpp-client/
-          ./mergin --help
+          LD_LIBRARY_PATH=../build-geodiff:$LD_LIBRARY_PATH ./mergin --help

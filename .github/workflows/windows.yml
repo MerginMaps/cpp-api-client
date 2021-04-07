@@ -44,9 +44,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
-          arch: win64_msvc2019_64
-          version: 5.14.2
-
+          
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.8
 
