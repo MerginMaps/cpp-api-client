@@ -1,0 +1,65 @@
+name: Windows Build
+on: [push]
+
+jobs:
+  windows_build:
+    if: ( github.repository == 'lutraconsulting/mergin-cpp-client' )
+    runs-on: windows-latest
+    env:
+      VS_VERSION: Visual Studio 16
+      VS_VER: 2019
+      SDK: release-1911
+      MSVC_VER: 1920
+      platform: x86
+
+    steps:
+      - name: Checkout mergin-cpp-client
+        uses: actions/checkout@v2
+        with:
+          path: mergin-cpp-client
+
+      - name: Checkout input
+        uses: actions/checkout@v2
+        with:
+          repository: lutraconsulting/input
+          ref: mergin_cpp
+          path: input
+
+      - name: Checkout geodiff
+        uses: actions/checkout@v2
+        with:
+          ref: 0.8.6
+          repository: lutraconsulting/geodiff
+          path: geodiff
+
+      - name: Install Qt
+          uses: jurplel/install-qt-action@v2
+
+      - name: Set compiler environment
+        shell: cmd
+        run: |
+            CALL "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
+
+      - name: Install Deps
+        run: |
+          sudo apt-get install cmake qt5-default libqt5network5
+
+      - name: build geodiff
+        shell: pwsh
+        run: |
+          if(-Not (Test-Path -Path build-geodiff)) { mkdir build-geodiff }
+          cd build-geodiff
+
+          cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=FALSE ..\geodiff\geodiff
+          cmake --build . --config Release
+
+      - name: build mergin-cpp-client
+        shell: pwsh
+        run: |
+          Copy-Item mergin-cpp-client\scripts\ci\config.pri mergin-cpp-client\src\config.pri
+          if(-Not (Test-Path -Path build-geodiff)) { mkdir build-mergin-cpp-client }
+          cd build-mergin-cpp-client
+
+          qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release
+          nmake
+          
