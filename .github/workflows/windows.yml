@@ -13,16 +13,6 @@ jobs:
       platform: x86
 
     steps:
-      - name: OpenSSL
-        shell: cmd
-        run: |
-          where openssl
-          dir "C:\Program Files\OpenSSL\"
-          dir "C:\Program Files\OpenSSL\bin"
-          dir "C:\Program Files\OpenSSL\lib"
-          dir
-          exit 1
-
       - name: Checkout mergin-cpp-client
         uses: actions/checkout@v2
         with:
@@ -86,12 +76,8 @@ jobs:
           cd rel
           copy ..\build-mergin-cpp-client\release\mergin.exe mergin.exe
           copy ..\build-geodiff\Release\geodiff.dll geodiff.dll
-
-          dir "%Qt5_Dir%\bin"
-          dir "%Qt5_Dir%\lib"
-          copy "%Qt5_Dir%\lib\libcrypto.dll" libcrypto.dll
-          copy "%Qt5_Dir%\lib\libssl.dll" libssl.dll
-
+          copy "C:\Program Files\OpenSSL\bin\libcrypto-1_1-x64.dll" libcrypto-1_1-x64.dll
+          copy "C:\Program Files\OpenSSL\bin\libssl-1_1-x64.dll" libssl-1_1-x64.dll
           call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           windeployqt --release mergin.exe
           dir
