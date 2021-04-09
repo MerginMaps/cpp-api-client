@@ -17,6 +17,10 @@ jobs:
         shell: cmd
         run: |
           where openssl
+          dir "C:\Program Files\OpenSSL\"
+          dir "C:\Program Files\OpenSSL\bin"
+          dir "C:\Program Files\OpenSSL\lib"
+          dir
           exit 1
 
       - name: Checkout mergin-cpp-client
