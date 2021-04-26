@@ -25,6 +25,7 @@ struct Args
   QString projectNamespace;
   QString projectName;
   QString dataDir;
+  QString logFile;
   int timeout = 10000;
 };
 
@@ -55,6 +56,9 @@ Args parseArgs()
   parser.setApplicationDescription( "Mergin Command Line Client" );
   QCommandLineOption helpOption = parser.addHelpOption();
   QCommandLineOption versionOption = parser.addVersionOption();
+  QCommandLineOption logOption("log", "log file (debug output)", "log");
+  parser.addOption(logOption);
+
   parser.addPositionalArgument( "command", "create/remove/download/sync" );
   parser.addPositionalArgument( "project", "namespace/projectname [only for create/remove/download]" );
 
@@ -74,10 +78,14 @@ Args parseArgs()
   args.url = parseEnvArg( parser.value( urlOption ), "MERGIN_URL", false ); // MerginApi has public.cloudmergin.com as default
   args.user = parseEnvArg( parser.value( userOption ), "MERGIN_USER" );
   args.pass = parseEnvArg( parser.value( passwordOption ), "MERGIN_PASSWORD" );
+  args.logFile = parser.value( logOption );
 
   const QStringList posArgs = parser.positionalArguments();
   if ( posArgs.isEmpty() )
     throw QString( "command is required positional argument" );
+
+  if (!args.logFile.isEmpty())
+    CoreUtils::setLogFilename(args.logFile);
 
   args.command = posArgs.at( 0 );
   if ( args.command == "create" ||
