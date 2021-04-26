@@ -1,4 +1,5 @@
 src/config.pri
+src/client.pro.user
 
 # Prerequisites
 *.d
