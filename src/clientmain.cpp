@@ -26,6 +26,7 @@ struct Args
   QString projectName;
   QString dataDir;
   QString logFile;
+  bool isJsonFormat;
   int timeout = 10000;
 };
 
@@ -56,10 +57,12 @@ Args parseArgs()
   parser.setApplicationDescription( "Mergin Command Line Client" );
   QCommandLineOption helpOption = parser.addHelpOption();
   QCommandLineOption versionOption = parser.addVersionOption();
-  QCommandLineOption logOption("log", "log file (debug output)", "log");
-  parser.addOption(logOption);
+  QCommandLineOption logOption( "log", "log file (debug output)", "log" );
+  parser.addOption( logOption );
+  QCommandLineOption jsonOption( "json", "output as JSON format (e.g. in info format)", "json" );
+  parser.addOption( jsonOption );
 
-  parser.addPositionalArgument( "command", "create/remove/download/sync" );
+  parser.addPositionalArgument( "command", "create/remove/download/sync/info" );
   parser.addPositionalArgument( "project", "namespace/projectname [only for create/remove/download]" );
 
   QCommandLineOption urlOption( "url", "or use env. var MERGIN_URL. defaults to https://public.cloudmergin.com/", "url" );
@@ -82,11 +85,10 @@ Args parseArgs()
   args.user = parseEnvArg( parser.value( userOption ), "MERGIN_USER" );
   args.pass = parseEnvArg( parser.value( passwordOption ), "MERGIN_PASSWORD" );
   args.logFile = parser.value( logOption );
+  args.isJsonFormat = parser.isSet( jsonOption );
 
-
-
-  if (!args.logFile.isEmpty())
-    CoreUtils::setLogFilename(args.logFile);
+  if ( !args.logFile.isEmpty() )
+    CoreUtils::setLogFilename( args.logFile );
 
   args.command = posArgs.at( 0 );
   if ( args.command == "create" ||
@@ -105,7 +107,8 @@ Args parseArgs()
     args.dataDir = QDir::currentPath();
 
   }
-  else if ( args.command == "sync" )
+  else if ( args.command == "sync" ||
+            args.command == "info" )
   {
     QDir current = QDir::current();
     current.cdUp();
@@ -156,6 +159,10 @@ int main( int argc, char *argv[] )
     else if ( args.command == "sync" )
     {
       cmd.sync();
+    }
+    else if ( args.command == "info" )
+    {
+      cmd.info( args.isJsonFormat );
     }
     else
     {

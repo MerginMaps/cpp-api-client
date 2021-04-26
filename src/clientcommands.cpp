@@ -10,6 +10,8 @@
 #include "clientcommands.h"
 #include <QEventLoop>
 #include <QTimer>
+#include <QTextStream>
+
 #include "merginuserauth.h"
 
 ClientCommands::ClientCommands( const QString &dir, int timeout ):
@@ -104,6 +106,61 @@ void ClientCommands::sync()
   if ( !lp.isValid() )
     throw QString( "no mergin project in the current directory" );
   download( lp.projectNamespace, lp.projectName );
+}
+
+static void printVal( bool isJsonFormat,
+                      QTextStream &out,
+                      const QString &key,
+                      const QString &val,
+                      bool isLast )
+{
+
+  QChar separator;
+  QChar quote;
+  QString space;
+  if ( isJsonFormat )
+  {
+    separator = ',';
+    quote = '"';
+  }
+  else
+  {
+    separator = '\n';
+    space = " ";
+  }
+
+  out << quote << key << quote << ":"  << space << quote << val << quote
+      ;
+
+  if ( !isLast )
+    out << separator;
+}
+
+void ClientCommands::info( bool isJsonFormat )
+{
+  Q_ASSERT( isAuthorized() );
+  LocalProject lp = mLocalProjectsManager.projectFromDirectory( QDir::currentPath() );
+  if ( !lp.isValid() )
+    throw QString( "no mergin project in the current directory" );
+
+  QTextStream out( stdout );
+
+  QChar prefix;
+  QChar suffix;
+  if ( isJsonFormat )
+  {
+    suffix = '}';
+    prefix = '{';
+  } else {
+    suffix = '\n';
+  }
+
+  out << prefix;
+  printVal( isJsonFormat, out, "name", lp.projectName, false );
+  printVal( isJsonFormat, out, "namespace", lp.projectNamespace, false );
+  printVal( isJsonFormat, out, "id", lp.id(), false );
+  printVal( isJsonFormat, out, "localVersion", QString::number( lp.localVersion ), true );
+  out << suffix;
 }
 
 
