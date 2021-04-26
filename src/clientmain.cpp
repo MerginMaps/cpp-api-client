@@ -70,8 +70,11 @@ Args parseArgs()
   parser.addOption( passwordOption );
 
   parser.parse( QCoreApplication::arguments() );
-  if ( parser.isSet( helpOption ) )
-    parser.showHelp(); // exits the app
+
+  const QStringList posArgs = parser.positionalArguments();
+  if ( parser.isSet( helpOption ) || posArgs.isEmpty() )
+    parser.showHelp(); // exits the ap
+
   if ( parser.isSet( versionOption ) )
     parser.showVersion(); // exits the app
 
@@ -80,9 +83,7 @@ Args parseArgs()
   args.pass = parseEnvArg( parser.value( passwordOption ), "MERGIN_PASSWORD" );
   args.logFile = parser.value( logOption );
 
-  const QStringList posArgs = parser.positionalArguments();
-  if ( posArgs.isEmpty() )
-    throw QString( "command is required positional argument" );
+
 
   if (!args.logFile.isEmpty())
     CoreUtils::setLogFilename(args.logFile);
