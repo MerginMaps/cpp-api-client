@@ -151,7 +151,9 @@ void ClientCommands::info( bool isJsonFormat )
   {
     suffix = '}';
     prefix = '{';
-  } else {
+  }
+  else
+  {
     suffix = '\n';
   }
 
