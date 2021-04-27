@@ -112,7 +112,6 @@ void ClientCommands::sync()
 
 void ClientCommands::info( bool isJsonFormat )
 {
-  Q_ASSERT( isAuthorized() );
   LocalProject lp = mLocalProjectsManager.projectFromDirectory( QDir::currentPath() );
   if ( !lp.isValid() )
     throw QString( "no mergin project in the current directory" );

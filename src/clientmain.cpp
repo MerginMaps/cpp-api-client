@@ -172,26 +172,24 @@ int main( int argc, char *argv[] )
     Args args = parseArgs();
     ClientCommands cmd( args.dataDir, args.timeout );
 
-    cmd.login( args.url,
-               args.user,
-               args.pass
-             );
-
-
     if ( args.command == "create" )
     {
+      cmd.login( args.url, args.user, args.pass );
       cmd.create( args.projectNamespace, args.projectName );
     }
     else if ( args.command == "remove" )
     {
+      cmd.login( args.url, args.user, args.pass );
       cmd.remove( args.projectNamespace, args.projectName );
     }
     else if ( args.command == "download" )
     {
+      cmd.login( args.url, args.user, args.pass );
       cmd.download( args.projectNamespace, args.projectName );
     }
     else if ( args.command == "sync" )
     {
+      cmd.login( args.url, args.user, args.pass );
       cmd.sync();
     }
     else if ( args.command == "info" )
