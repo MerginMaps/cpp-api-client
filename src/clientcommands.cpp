@@ -10,6 +10,10 @@
 #include "clientcommands.h"
 #include <QEventLoop>
 #include <QTimer>
+#include <QTextStream>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 #include "merginuserauth.h"
 
 ClientCommands::ClientCommands( const QString &dir, int timeout ):
@@ -104,6 +108,35 @@ void ClientCommands::sync()
   if ( !lp.isValid() )
     throw QString( "no mergin project in the current directory" );
   download( lp.projectNamespace, lp.projectName );
+}
+
+void ClientCommands::info( bool isJsonFormat )
+{
+  LocalProject lp = mLocalProjectsManager.projectFromDirectory( QDir::currentPath() );
+  if ( !lp.isValid() )
+    throw QString( "no mergin project in the current directory" );
+
+  QTextStream out( stdout );
+  if ( isJsonFormat )
+  {
+    QJsonObject jsonData
+    {
+      {"name", QJsonValue( lp.projectName )},
+      {"namespace", QJsonValue( lp.projectNamespace )},
+      {"id", QJsonValue( lp.id() )},
+      {"localVersion", QJsonValue( lp.localVersion )}
+    };
+
+    QJsonDocument doc( jsonData );
+    out << doc.toJson( QJsonDocument::Compact );
+  }
+  else
+  {
+    out << "name: " << lp.projectName << endl;
+    out << "namespace: " << lp.projectNamespace << endl;
+    out << "id: " << lp.id() << endl;
+    out << "localVersion: " << lp.localVersion << endl;
+  }
 }
 
 

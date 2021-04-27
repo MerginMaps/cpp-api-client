@@ -22,7 +22,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: lutraconsulting/input
-          ref: projects-model-refactoring-main
           path: input
 
       - name: Checkout geodiff

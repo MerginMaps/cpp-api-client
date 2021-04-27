@@ -19,7 +19,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: lutraconsulting/input
-          ref: mergin_cpp
           path: input
 
       - name: Checkout geodiff

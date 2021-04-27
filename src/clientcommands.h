@@ -31,6 +31,7 @@ class ClientCommands: public QObject
     void remove( const QString &projectNamespace, const QString &projectName );
     void download( const QString &projectNamespace, const QString &projectName );
     void sync( );
+    void info( bool isJsonFormat );
 
   private:
     bool isAuthorized();
