@@ -11,6 +11,8 @@
 #include <QEventLoop>
 #include <QTimer>
 #include <QTextStream>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "merginuserauth.h"
 
@@ -108,34 +110,6 @@ void ClientCommands::sync()
   download( lp.projectNamespace, lp.projectName );
 }
 
-static void printVal( bool isJsonFormat,
-                      QTextStream &out,
-                      const QString &key,
-                      const QString &val,
-                      bool isLast )
-{
-
-  QChar separator;
-  QChar quote;
-  QString space;
-  if ( isJsonFormat )
-  {
-    separator = ',';
-    quote = '"';
-  }
-  else
-  {
-    separator = '\n';
-    space = " ";
-  }
-
-  out << quote << key << quote << ":"  << space << quote << val << quote
-      ;
-
-  if ( !isLast )
-    out << separator;
-}
-
 void ClientCommands::info( bool isJsonFormat )
 {
   Q_ASSERT( isAuthorized() );
@@ -145,24 +119,27 @@ void ClientCommands::info( bool isJsonFormat )
 
   QTextStream out( stdout );
 
-  QChar prefix;
-  QChar suffix;
+
   if ( isJsonFormat )
   {
-    suffix = '}';
-    prefix = '{';
+    QJsonObject jsonData
+    {
+      {"name", QJsonValue( lp.projectName )},
+      {"namespace", QJsonValue( lp.projectNamespace )},
+      {"id", QJsonValue( lp.id() )},
+      {"localVersion", QJsonValue( lp.localVersion )}
+    };
+
+    QJsonDocument doc( jsonData );
+    out << doc.toJson( QJsonDocument::Compact );
   }
   else
   {
-    suffix = '\n';
+    out << "name: " << lp.projectName << endl;
+    out << "namespace: " << lp.projectNamespace << endl;
+    out << "id: " << lp.id() << endl;
+    out << "localVersion: " << lp.localVersion << endl;
   }
-
-  out << prefix;
-  printVal( isJsonFormat, out, "name", lp.projectName, false );
-  printVal( isJsonFormat, out, "namespace", lp.projectNamespace, false );
-  printVal( isJsonFormat, out, "id", lp.id(), false );
-  printVal( isJsonFormat, out, "localVersion", QString::number( lp.localVersion ), true );
-  out << suffix;
 }
 
 
