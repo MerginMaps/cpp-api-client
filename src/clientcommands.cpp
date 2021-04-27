@@ -118,8 +118,6 @@ void ClientCommands::info( bool isJsonFormat )
     throw QString( "no mergin project in the current directory" );
 
   QTextStream out( stdout );
-
-
   if ( isJsonFormat )
   {
     QJsonObject jsonData
