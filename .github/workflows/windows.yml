@@ -27,7 +27,7 @@ jobs:
       - name: Checkout geodiff
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: 0.8.8
           repository: lutraconsulting/geodiff
           path: geodiff
 
