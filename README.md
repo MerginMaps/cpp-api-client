@@ -1,11 +1,13 @@
+[![Code Layout](https://github.com/lutraconsulting/mergin-cpp-client/workflows/Code%20Layout/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions?query=workflow%3A%22Code+Layout%22)
+[![Linux Build](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/linux.yml/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/linux.yml)
+[![Windows Build](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/windows.yml/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/windows.yml)
+
 # Mergin Cpp Client
 
 This repository contains a cpp client module for access to [Mergin](https://public.cloudmergin.com/)
 service and a command-line tool for easy access to data stored in Mergin.
 
-[![Code Layout](https://github.com/lutraconsulting/mergin-cpp-client/workflows/Code%20Layout/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions?query=workflow%3A%22Code+Layout%22)
-[![Linux Build](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/linux.yml/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/linux.yml)
-[![Windows Build](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/windows.yml/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/windows.yml)
+<div><img align="left" width="45" height="45" src="https://raw.githubusercontent.com/MerginMaps/docs/main/src/.vuepress/public/slack.svg"><a href="https://merginmaps.com/community/join">Join our community chat</a><br/>and ask questions!</div><br />
 
 Note: Check also [Mergin Python Client](https://github.com/lutraconsulting/mergin-py-client)
 
