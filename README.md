@@ -2,14 +2,14 @@
 [![Linux Build](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/linux.yml/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/linux.yml)
 [![Windows Build](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/windows.yml/badge.svg)](https://github.com/lutraconsulting/mergin-cpp-client/actions/workflows/windows.yml)
 
-# Mergin Cpp Client
+# Mergin Maps Cpp Client
 
-This repository contains a cpp client module for access to [Mergin](https://public.cloudmergin.com/)
+This repository contains a cpp client module for access to [Mergin Maps](https://merginmaps.com)
 service and a command-line tool for easy access to data stored in Mergin.
 
 <div><img align="left" width="45" height="45" src="https://raw.githubusercontent.com/MerginMaps/docs/main/src/.vuepress/public/slack.svg"><a href="https://merginmaps.com/community/join">Join our community chat</a><br/>and ask questions!</div><br />
 
-Note: Check also [Mergin Python Client](https://github.com/lutraconsulting/mergin-py-client)
+Note: Check also [Mergin Maps Python Client](https://github.com/lutraconsulting/mergin-py-client)
 
 ## Command-line Tool
 
@@ -19,16 +19,16 @@ When the client is installed, it comes with `mergin` command line tool.
 $ mergin --help
 Usage: mergin [OPTIONS] COMMAND [ARGS]...
 
-Options:  
+Options:
   --help      Show this message and exit.
   --version   Show the version information.
   --username  Mergin username (or MERGIN_USERNAME env. variable)
   --password  Mergin password (or MERGIN_PASSWORD env. variable)
-  --url       Mergin url      (defaults to public.cloudmergin.com)
+  --url       Mergin Maps url      (defaults to https://app.merginmaps.com)
 
 Commands:
-  create         Create a new project on Mergin server
-  download       Download last version of mergin project
+  create         Create a new project on Mergin Maps server
+  download       Download last version of Mergin Maps project
   sync           Pull&Push the changes
   remove         Remove project from server.
 ```
@@ -38,7 +38,7 @@ Commands:
 
 ### Compilation
 
-#### Windows 
+#### Windows
 
 For CI setup, see this [GitHub Action](.github/workflows/windows.yml)
 

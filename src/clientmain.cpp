@@ -51,13 +51,13 @@ QString parseEnvArg( const QString &value, const QString &envKey, bool required 
 QString appDescription()
 {
   QString ret =
-    "Mergin Command Line Client\n"\
+    "Mergin Maps Command Line Client\n"\
     "\n"\
     "Auth\n"\
     "----\n"\
     " - use URL, username, password from command line args - e.g.  --url https://dev.mergin.io/ --user martin --password XYZ\n"\
     " - for any bits (URL / username / password) not specified as command line args, you may use env variables: MERGIN_URL, MERGIN_USER, MERGIN_PASSWORD\n"\
-    " - if URL is omitted, we would use public.cloudmergin.com\n"\
+    " - if URL is omitted, we would use https://app.merginmaps.com\n"\
     "\n"\
     "Commands\n"\
     "--------\n"\
@@ -87,7 +87,7 @@ Args parseArgs()
   parser.addOption( verboseOption );
   QCommandLineOption jsonOption( "json", "Output 'info' command output in JSON format" );
   parser.addOption( jsonOption );
-  QCommandLineOption urlOption( "url", "or use env. var MERGIN_URL. defaults to https://public.cloudmergin.com/", "url" );
+  QCommandLineOption urlOption( "url", "or use env. var MERGIN_URL. defaults to https://app.merginmaps.com/", "url" );
   parser.addOption( urlOption );
   QCommandLineOption userOption( "user", "or use env. var MERGIN_USER", "user" );
   parser.addOption( userOption );
@@ -106,7 +106,7 @@ Args parseArgs()
   if ( parser.isSet( versionOption ) )
     parser.showVersion(); // exits the app
 
-  args.url = parseEnvArg( parser.value( urlOption ), "MERGIN_URL", false ); // MerginApi has public.cloudmergin.com as default
+  args.url = parseEnvArg( parser.value( urlOption ), "MERGIN_URL", false ); // MerginApi has https://app.merginmaps.com as default
   args.user = parseEnvArg( parser.value( userOption ), "MERGIN_USER" );
   args.pass = parseEnvArg( parser.value( passwordOption ), "MERGIN_PASSWORD" );
   args.isVerbose = parser.isSet( verboseOption );

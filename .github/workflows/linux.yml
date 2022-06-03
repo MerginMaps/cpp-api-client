@@ -1,7 +1,7 @@
 name: Linux Build
 on: [push]
 env:
-  TEST_MERGIN_URL: https://test.dev.cloudmergin.com/
+  TEST_MERGIN_URL: https://test.dev.merginmaps.com/
   TEST_API_USERNAME: test_inputapp
   TEST_API_PASSWORD: ${{ secrets.MERGINTEST_API_PASSWORD }}
 
