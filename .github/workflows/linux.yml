@@ -1,10 +1,17 @@
 name: Linux Build
 on: [push]
 env:
-  TEST_MERGIN_URL: https://test.dev.cloudmergin.com/
+  TEST_MERGIN_URL: https://test.dev.merginmaps.com/
   TEST_API_USERNAME: test_inputapp
   TEST_API_PASSWORD: ${{ secrets.MERGINTEST_API_PASSWORD }}
-
+  QT_VERSION: '5.14.2'
+  CACHE_VERSION: 1
+  GEODIFF_VERSION: 1.0.6
+  
+concurrency:
+  group: ci-${{github.ref}}-linux
+  cancel-in-progress: true
+  
 jobs:
   linux_build:
     if: ( github.repository == 'MerginMaps/mergin-cpp-client' )
@@ -24,14 +31,28 @@ jobs:
       - name: Checkout geodiff
         uses: actions/checkout@v2
         with:
-          ref: 1.0.6
+          ref: ${{ env.GEODIFF_VERSION }}
           repository: MerginMaps/geodiff
           path: geodiff
 
       - name: Install Deps
         run: |
-          sudo apt-get install cmake qt5-default libqt5network5
+          sudo apt-get install cmake
 
+      - name: Cache Qt
+        id: cache-qt
+        uses: pat-s/always-upload-cache@v2.1.5
+        with:
+          path: ${{ github.workspace }}/Qt
+          key: ${{ runner.os }}-QtCache-v1-${{ env.QT_VERSION }}-${{ env.CACHE_VERSION }}
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ env.QT_VERSION }}
+          dir: ${{ github.workspace }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          
       - name: build geodiff
         run: |
           mkdir -p build-geodiff

@@ -1,6 +1,16 @@
 name: Windows Build
 on: [push]
 
+env:
+  CCACHE_DIR: ~/.ccache
+  QT_VERSION: '5.14.2'
+  CACHE_VERSION: 1
+  GEODIFF_VERSION: 1.0.6
+
+concurrency:
+  group: ci-${{github.ref}}-windows
+  cancel-in-progress: true
+  
 jobs:
   windows_build:
     if: ( github.repository == 'MerginMaps/mergin-cpp-client' )
@@ -32,20 +42,22 @@ jobs:
       - name: Checkout geodiff
         uses: actions/checkout@v2
         with:
-          ref: 1.0.6
+          ref: ${{ env.GEODIFF_VERSION }}
           repository: lutraconsulting/geodiff
           path: geodiff
 
-      - name: Cache Qt from qt.io
+      - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v1
+        uses: pat-s/always-upload-cache@v2.1.5
         with:
-          path: ../Qt
-          key: Windows-QtCache
+          path: ${{ github.workspace }}/Qt
+          key: ${{ runner.os }}-QtCache-v1-${{ env.QT_VERSION }}-${{ env.CACHE_VERSION }}
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
+          version: ${{ env.QT_VERSION }}
+          dir: ${{ github.workspace }}
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Setup cmake
