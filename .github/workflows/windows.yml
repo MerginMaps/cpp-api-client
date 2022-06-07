@@ -3,16 +3,21 @@ on: [push]
 
 jobs:
   windows_build:
-    if: ( github.repository == 'lutraconsulting/mergin-cpp-client' )
+    if: ( github.repository == 'MerginMaps/mergin-cpp-client' )
     runs-on: windows-latest
-    env:
-      VS_VERSION: Visual Studio 16
-      VS_VER: 2019
-      SDK: release-1911
-      MSVC_VER: 1920
-      platform: x86
 
     steps:
+      - name: install deps
+        run: |
+          C:/vcpkg/vcpkg install sqlite3[rtree,fts3,json1] --triplet x64-windows
+          C:/vcpkg/vcpkg integrate install
+          dir "C:/vcpkg/installed/x64-windows/bin"
+      
+      - name: set compiler environment
+        shell: cmd
+        run: |
+            CALL "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
+        
       - name: Checkout mergin-cpp-client
         uses: actions/checkout@v2
         with:
@@ -27,10 +32,9 @@ jobs:
       - name: Checkout geodiff
         uses: actions/checkout@v2
         with:
-          ref: 0.8.8
+          ref: 1.0.6
           repository: lutraconsulting/geodiff
           path: geodiff
-
 
       - name: Cache Qt from qt.io
         id: cache-qt
@@ -53,7 +57,6 @@ jobs:
           mkdir build-geodiff
           cd build-geodiff
 
-          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           cmake -DENABLE_TESTS=FALSE ..\geodiff\geodiff
           cmake --build . --config Release
 
@@ -64,7 +67,6 @@ jobs:
           mkdir build-mergin-cpp-client
           cd build-mergin-cpp-client
 
-          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static
           nmake release
 

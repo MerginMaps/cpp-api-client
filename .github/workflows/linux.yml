@@ -7,7 +7,7 @@ env:
 
 jobs:
   linux_build:
-    if: ( github.repository == 'lutraconsulting/mergin-cpp-client' )
+    if: ( github.repository == 'MerginMaps/mergin-cpp-client' )
     runs-on: ubuntu-latest
     steps:
       - name: Checkout mergin-cpp-client
@@ -24,8 +24,8 @@ jobs:
       - name: Checkout geodiff
         uses: actions/checkout@v2
         with:
-          ref: 0.8.8
-          repository: lutraconsulting/geodiff
+          ref: 1.0.6
+          repository: MerginMaps/geodiff
           path: geodiff
 
       - name: Install Deps
