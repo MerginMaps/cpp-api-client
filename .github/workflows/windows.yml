@@ -64,13 +64,20 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.8
 
       - name: build geodiff
-        shell: cmd
+        shell: pwsh
         run: |
-          mkdir build-geodiff
-          cd build-geodiff
-
-          cmake -DENABLE_TESTS=FALSE ..\geodiff\geodiff
-          cmake --build . --config Release
+          $ErrorActionPreference = 'continue'
+          function exec
+          {
+              param ( [ScriptBlock] $ScriptBlock )
+              & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
+              if ($LastExitCode -ne 0) { exit $LastExitCode }
+          }
+          cd $env:GITHUB_WORKSPACE
+          mkdir build
+          cd build
+          exec { cmake -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake  -DENABLE_TESTS=ON  -DWITH_POSTGRESQL=FALSE ../geodiff  }
+          exec { cmake --build . --config Release }
 
       - name: build mergin-cpp-client
         shell: cmd

@@ -72,8 +72,7 @@ jobs:
           mkdir -p build-mergin-cpp-client
           cd build-mergin-cpp-client
 
-          qmake \
-            'QMAKE_CFLAGS_ISYSTEM=-I' \
+          $QMAKE_CXX \
             ../mergin-cpp-client/src/client.pro \
             CONFIG+=debug
 
