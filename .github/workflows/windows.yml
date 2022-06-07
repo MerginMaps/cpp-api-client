@@ -6,6 +6,7 @@ env:
   QT_VERSION: '5.14.2'
   CACHE_VERSION: 1
   GEODIFF_VERSION: 1.0.6
+  INPUT_VERSION: 1.5.1
 
 concurrency:
   group: ci-${{github.ref}}-windows
@@ -22,11 +23,6 @@ jobs:
           C:/vcpkg/vcpkg install sqlite3[rtree,fts3,json1] --triplet x64-windows
           C:/vcpkg/vcpkg integrate install
           dir "C:/vcpkg/installed/x64-windows/bin"
-      
-      - name: set compiler environment
-        shell: cmd
-        run: |
-            CALL "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
         
       - name: Checkout mergin-cpp-client
         uses: actions/checkout@v2
@@ -36,6 +32,7 @@ jobs:
       - name: Checkout input
         uses: actions/checkout@v2
         with:
+          ref: ${{ env.INPUT_VERSION }}
           repository: MerginMaps/input
           path: input
 
@@ -73,6 +70,7 @@ jobs:
               & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
               if ($LastExitCode -ne 0) { exit $LastExitCode }
           }
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
           cd $env:GITHUB_WORKSPACE
           mkdir build-geodiff
           cd build-geodiff
@@ -85,7 +83,7 @@ jobs:
           copy mergin-cpp-client\scripts\ci\config.pri mergin-cpp-client\src\config.pri
           mkdir build-mergin-cpp-client
           cd build-mergin-cpp-client
-
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
           qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static
           nmake release
 
@@ -98,7 +96,7 @@ jobs:
           copy ..\build-geodiff\Release\geodiff.dll geodiff.dll
           copy "C:\Program Files\OpenSSL\bin\libcrypto-1_1-x64.dll" libcrypto-1_1-x64.dll
           copy "C:\Program Files\OpenSSL\bin\libssl-1_1-x64.dll" libssl-1_1-x64.dll
-          call "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
           windeployqt --release mergin.exe
           dir
 

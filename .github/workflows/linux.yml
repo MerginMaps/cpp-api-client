@@ -7,6 +7,7 @@ env:
   QT_VERSION: '5.14.2'
   CACHE_VERSION: 1
   GEODIFF_VERSION: 1.0.6
+  INPUT_VERSION: 1.5.1
   
 concurrency:
   group: ci-${{github.ref}}-linux
@@ -25,6 +26,7 @@ jobs:
       - name: Checkout input
         uses: actions/checkout@v2
         with:
+          ref: ${{ env.INPUT_VERSION }}
           repository: MerginMaps/input
           path: input
 
@@ -72,7 +74,7 @@ jobs:
           mkdir -p build-mergin-cpp-client
           cd build-mergin-cpp-client
 
-          $Qt5_DIR\qmake \
+          $Qt5_DIR/qmake \
             ../mergin-cpp-client/src/client.pro \
             CONFIG+=debug
 
