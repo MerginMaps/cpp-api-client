@@ -25,7 +25,7 @@ jobs:
       - name: Checkout input
         uses: actions/checkout@v2
         with:
-          repository: lutraconsulting/input
+          repository: MerginMaps/input
           path: input
 
       - name: Checkout geodiff
@@ -72,7 +72,7 @@ jobs:
           mkdir -p build-mergin-cpp-client
           cd build-mergin-cpp-client
 
-          $QMAKE_CXX \
+          $Qt5_DIR\qmake \
             ../mergin-cpp-client/src/client.pro \
             CONFIG+=debug
 
