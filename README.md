@@ -9,7 +9,7 @@ service and a command-line tool for easy access to data stored in Mergin.
 
 <div><img align="left" width="45" height="45" src="https://raw.githubusercontent.com/MerginMaps/docs/main/src/.vuepress/public/slack.svg"><a href="https://merginmaps.com/community/join">Join our community chat</a><br/>and ask questions!</div><br />
 
-Note: Check also [Mergin Maps Python Client](https://github.com/lutraconsulting/mergin-py-client)
+Note: Check also [Mergin Maps Python Client](https://github.com/MerginMaps/mergin-py-client)
 
 ## Command-line Tool
 
