@@ -1,6 +1,7 @@
 [![Code Layout](https://github.com/MerginMaps/mergin-cpp-client/workflows/Code%20Layout/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions?query=workflow%3A%22Code+Layout%22)
 [![Linux Build](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/linux.yml/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/linux.yml)
 [![Windows Build](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/windows.yml/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/windows.yml)
+[![macOS Build](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/macos.yml/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/macos.yml)
 
 # Mergin Maps Cpp Client
 

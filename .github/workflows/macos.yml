@@ -1,4 +1,4 @@
-name: Linux Build
+name: macOS Build
 on: [push]
 env:
   QT_VERSION: '5.14.2'
@@ -62,6 +62,8 @@ jobs:
           cmake \
             -DCMAKE_BUILD_TYPE=Debug \
             -DENABLE_TESTS=FALSE \
+            -DSQLite3_INCLUDE_DIR=/usr/local/opt/sqlite3/include \
+            -DSQLite3_LIBRARY=/usr/local/opt/sqlite3/lib/libsqlite3.dylib
             ../geodiff/geodiff
 
           make
