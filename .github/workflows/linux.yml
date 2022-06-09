@@ -64,6 +64,8 @@ jobs:
           cmake \
             -DCMAKE_BUILD_TYPE=Debug \
             -DENABLE_TESTS=FALSE \
+            -DBUILD_STATIC=ON \
+            -DBUILD_SHARED=OFF \
             ../geodiff/geodiff
 
           make
@@ -85,4 +87,4 @@ jobs:
       - name: run tests
         run: |
          cd build-mergin-cpp-client/
-         LD_LIBRARY_PATH=../build-geodiff:$LD_LIBRARY_PATH ../tests.bash `pwd`/mergin
+         $(pwd)/../mergin-cpp-client/tests.bash $(pwd)/mergin

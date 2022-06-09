@@ -74,7 +74,7 @@ jobs:
           cd $env:GITHUB_WORKSPACE
           mkdir build-geodiff
           cd build-geodiff
-          exec { cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake  -DENABLE_TESTS=ON  -DWITH_POSTGRESQL=FALSE ../geodiff/geodiff  }
+          exec { cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake  -DENABLE_TESTS=ON  -DWITH_POSTGRESQL=FALSE -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ../geodiff/geodiff  }
           exec { cmake --build . --config Release }
 
       - name: build mergin-cpp-client
@@ -93,7 +93,6 @@ jobs:
           mkdir rel
           cd rel
           copy ..\build-mergin-cpp-client\release\mergin.exe mergin.exe
-          copy ..\build-geodiff\Release\geodiff.dll geodiff.dll
           copy "C:\Program Files\OpenSSL\bin\libcrypto-1_1-x64.dll" libcrypto-1_1-x64.dll
           copy "C:\Program Files\OpenSSL\bin\libssl-1_1-x64.dll" libssl-1_1-x64.dll
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64

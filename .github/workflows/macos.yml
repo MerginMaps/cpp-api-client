@@ -65,6 +65,8 @@ jobs:
           cmake \
             -DCMAKE_BUILD_TYPE=Debug \
             -DENABLE_TESTS=FALSE \
+            -DBUILD_STATIC=ON \
+            -DBUILD_SHARED=OFF
             -DSQLite3_INCLUDE_DIR=/usr/local/opt/sqlite3/include \
             -DSQLite3_LIBRARY=/usr/local/opt/sqlite3/lib/libsqlite3.dylib \
             ../geodiff/geodiff
@@ -86,6 +88,5 @@ jobs:
       - name: run tests
         run: |
          cd build-mergin-cpp-client/
-         install_name_tool -add_rpath ../build-geodiff `pwd`/mergin
-         ../tests.bash `pwd`/mergin
+         $(pwd)/../mergin-cpp-client/tests.bash `pwd`/mergin
          
