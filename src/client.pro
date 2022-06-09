@@ -29,3 +29,7 @@ LIBS += -lgeodiff
 INCLUDEPATH += $${SQLITE3_INCLUDE_DIR}
 LIBS += -L$${SQLITE3_LIB_DIR}
 LIBS += -lsqlite3 
+
+win32 {
+    LIBS += -lshlwapi
+}
