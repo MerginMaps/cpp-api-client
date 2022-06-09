@@ -75,7 +75,7 @@ jobs:
           cd $env:GITHUB_WORKSPACE
           mkdir build-geodiff
           cd build-geodiff
-          exec { cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake  -DENABLE_TESTS=ON  -DWITH_POSTGRESQL=FALSE -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ../geodiff/geodiff  }
+          exec { cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DSQLite3_INCLUDE_DIR=C:/vcpkg/packages/sqlite3_x64-windows-static/include -DSQLite3_LIBRARY=C:/vcpkg/packages/sqlite3_x64-windows-static/lib/sqlite3.lib  -DENABLE_TESTS=ON  -DWITH_POSTGRESQL=FALSE -DBUILD_STATIC=ON -DBUILD_SHARED=OFF ../geodiff/geodiff  }
           exec { cmake --build . --config Release }
 
       - name: build mergin-cpp-client
