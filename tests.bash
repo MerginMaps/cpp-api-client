@@ -39,12 +39,12 @@ fi
 echo "*****************************************"
 echo "testing sync1 $PROJECT on $TEST_MERGIN_URL"
 cd $PROJECT_NAME
-touch myfile1.txt
+echo "test1" > myfile1.txt
 $CPP_CLIENT --url $TEST_MERGIN_URL --user $TEST_API_USERNAME --password $TEST_API_PASSWORD --verbose sync || { echo ' unable to sync1 project' ; exit 1; }
 
 echo "*****************************************"
 echo "testing sync2 $PROJECT on $TEST_MERGIN_URL"
-touch myfile2.txt
+echo "test2" > myfile2.txt
 $CPP_CLIENT --url $TEST_MERGIN_URL --user $TEST_API_USERNAME --password $TEST_API_PASSWORD --verbose sync || { echo ' unable to sync2 project' ; exit 1; }
 
 echo "*****************************************"
