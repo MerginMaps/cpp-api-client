@@ -5,6 +5,9 @@ env:
   CACHE_VERSION: 2
   GEODIFF_VERSION: 1.0.6
   INPUT_VERSION: 'master'
+  TEST_MERGIN_URL: https://test.dev.merginmaps.com/
+  TEST_API_USERNAME: test_inputapp
+  TEST_API_PASSWORD: ${{ secrets.MERGINTEST_API_PASSWORD }}
   
 concurrency:
   group: ci-${{github.ref}}-macos
@@ -67,7 +70,6 @@ jobs:
             ../geodiff/geodiff
 
           make
-          sudo make install
 
       - name: build mergin-cpp-client
         run: |
@@ -80,3 +82,10 @@ jobs:
             CONFIG+=debug
 
           make
+
+      - name: run tests
+        run: |
+         cd build-mergin-cpp-client/
+         install_name_tool -add_rpath ../build-geodiff `pwd`/mergin
+         ../tests.bash `pwd`/mergin
+         

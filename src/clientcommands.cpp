@@ -80,7 +80,7 @@ void ClientCommands::remove( const QString &projectNamespace, const QString &pro
 
 }
 
-void ClientCommands::download( const QString &projectNamespace, const QString &projectName )
+void ClientCommands::pull( const QString &projectNamespace, const QString &projectName )
 {
   Q_ASSERT( isAuthorized() );
 
@@ -91,11 +91,29 @@ void ClientCommands::download( const QString &projectNamespace, const QString &p
   connect( &mApi, &MerginApi::syncProjectFinished, &loop, &QEventLoop::quit );
   connect( &timer, &QTimer::timeout, &loop, &QEventLoop::quit );
   timer.start( mTimeout );
-  mApi.updateProject( projectNamespace, projectName );
+  mApi.pullProject( projectNamespace, projectName );
   loop.exec();
 
   if ( !timer.isActive() )
-    throw QString( "timeout for download" );
+    throw QString( "timeout for pull" );
+}
+
+void ClientCommands::push( const QString &projectNamespace, const QString &projectName )
+{
+  Q_ASSERT( isAuthorized() );
+
+  QTimer timer;
+  timer.setSingleShot( true );
+  QEventLoop loop;
+
+  connect( &mApi, &MerginApi::syncProjectFinished, &loop, &QEventLoop::quit );
+  connect( &timer, &QTimer::timeout, &loop, &QEventLoop::quit );
+  timer.start( mTimeout );
+  mApi.pushProject( projectNamespace, projectName );
+  loop.exec();
+
+  if ( !timer.isActive() )
+    throw QString( "timeout for push" );
 }
 
 void ClientCommands::sync()
@@ -104,7 +122,8 @@ void ClientCommands::sync()
   LocalProject lp = mLocalProjectsManager.projectFromDirectory( QDir::currentPath() );
   if ( !lp.isValid() )
     throw QString( "no mergin project in the current directory" );
-  download( lp.projectNamespace, lp.projectName );
+  push( lp.projectNamespace, lp.projectName );
+  pull( lp.projectNamespace, lp.projectName );
 }
 
 void ClientCommands::info( bool isJsonFormat )

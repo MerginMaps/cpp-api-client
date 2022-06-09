@@ -80,8 +80,8 @@ jobs:
             CONFIG+=debug
 
           make
-
-      - name: run mergin tests
+          
+      - name: run tests
         run: |
-          cd build-mergin-cpp-client/
-          LD_LIBRARY_PATH=../build-geodiff:$LD_LIBRARY_PATH ./mergin --help
+         cd build-mergin-cpp-client/
+         LD_LIBRARY_PATH=../build-geodiff:$LD_LIBRARY_PATH ../tests.bash `pwd`/mergin

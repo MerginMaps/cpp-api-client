@@ -63,6 +63,7 @@ For CI setup, see this [GitHub Action](.github/workflows/windows.yml)
 ```
  <in VS cmd>
  cd build-client
+ cp ..\mergin-cpp-client\scripts\ci\config.pri ..\mergin-cpp-client\src\config.pri (+ modify!!)
  qmake ..\mergin-cpp-client\src\client.pro
  nmake release
 ```
@@ -72,11 +73,8 @@ For CI setup, see this [GitHub Action](.github/workflows/windows.yml)
 For running test do:
 
 ```
-    cd mergin
     export TEST_MERGIN_URL=<url> # testing server
     export TEST_API_USERNAME=<username>
     export TEST_API_PASSWORD=<pwd>
-    export TEST_API_USERNAME2=<username2>
-    export TEST_API_PASSWORD2=<pwd2>
-    pipenv run pytest --cov-report html --cov=mergin test/
+    ./tests.bash
 ```
