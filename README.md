@@ -51,8 +51,8 @@ For CI setup, see this [GitHub Action](.github/workflows/windows.yml)
  <in VS cmd>
  git clone https://github.com/MerginMaps/geodiff
  cd build-geodiff
- cmake ..\geodiff\geodiff
- cmake --build . --config Release
+ cmake ..\geodiff\geodiff 
+ cmake --build . --config Release           
 ```
 5. Download Input
 ```
@@ -76,5 +76,5 @@ For running test do:
     export TEST_MERGIN_URL=<url> # testing server
     export TEST_API_USERNAME=<username>
     export TEST_API_PASSWORD=<pwd>
-    ./tests.bash
+    ./tests.bash <path_to>/mergin
 ```
