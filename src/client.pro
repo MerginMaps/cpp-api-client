@@ -21,11 +21,11 @@ HEADERS += \
   clientcommands.h
 
 # Geodiff
+DEFINES += "GEODIFF_STATIC"
 INCLUDEPATH += $${GEODIFF_INCLUDE_DIR}
 LIBS += -L$${GEODIFF_LIB_DIR}
-LIBS += -lgeodiff
+LIBS += -lgeodiff 
 
-# Sqlite3
 INCLUDEPATH += $${SQLITE3_INCLUDE_DIR}
 LIBS += -L$${SQLITE3_LIB_DIR}
-LIBS += -lsqlite3
+LIBS += -lsqlite3 
