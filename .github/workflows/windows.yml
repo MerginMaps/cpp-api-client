@@ -22,12 +22,8 @@ jobs:
         run: |
           C:/vcpkg/vcpkg install sqlite3[rtree,fts3,json1] --triplet x64-windows-static 
           C:/vcpkg/vcpkg integrate install
-          
-          dir "C:/vcpkg/packages/sqlite3_x64-windows-static/"
+          dir "C:/vcpkg/packages/sqlite3_x64-windows-static/include"
           dir "C:/vcpkg/packages/sqlite3_x64-windows-static/lib/"
-         
-          dir "C:/vcpkg/installed/x64-windows/lib"
-          dir "C:/vcpkg/installed/x64-windows/include"
         
       - name: Checkout mergin-cpp-client
         uses: actions/checkout@v2
