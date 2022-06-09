@@ -45,7 +45,7 @@ $CPP_CLIENT --url $TEST_MERGIN_URL --user $TEST_API_USERNAME --password $TEST_AP
 echo "*****************************************"
 echo "testing sync2 $PROJECT on $TEST_MERGIN_URL"
 touch myfile2.txt
-$CPP_CLIENT --url $TEST_MERGIN_URL --user $TEST_API_USERNAME --password $TEST_API_PASSWORD sync || { echo ' unable to sync2 project' ; exit 1; }
+$CPP_CLIENT --url $TEST_MERGIN_URL --user $TEST_API_USERNAME --password $TEST_API_PASSWORD --verbose sync || { echo ' unable to sync2 project' ; exit 1; }
 
 echo "*****************************************"
 echo "testing info $PROJECT on $TEST_MERGIN_URL"
