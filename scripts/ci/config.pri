@@ -3,7 +3,7 @@ win32 {
   GEODIFF_INCLUDE_DIR = $$PWD/../../geodiff/geodiff/src
   GEODIFF_LIB_DIR = $$PWD/../../build-geodiff/Release
   SQLITE3_INCLUDE_DIR = C:/vcpkg/installed/x64-windows/include
-  SQLITE3_LIB_DIR = C:/vcpkg/installed/x64-windows/bin
+  SQLITE3_LIB_DIR = C:/vcpkg/installed/x64-windows/lib
 }
 
 unix {
