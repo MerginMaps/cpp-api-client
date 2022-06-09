@@ -123,7 +123,6 @@ void ClientCommands::sync()
   if ( !lp.isValid() )
     throw QString( "no mergin project in the current directory" );
   push( lp.projectNamespace, lp.projectName );
-  pull( lp.projectNamespace, lp.projectName );
 }
 
 void ClientCommands::info( bool isJsonFormat )
