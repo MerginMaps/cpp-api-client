@@ -70,11 +70,11 @@ jobs:
               & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
               if ($LastExitCode -ne 0) { exit $LastExitCode }
           }
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64
           cd $env:GITHUB_WORKSPACE
           mkdir build-geodiff
           cd build-geodiff
-          exec { cmake -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake  -DENABLE_TESTS=ON  -DWITH_POSTGRESQL=FALSE ../geodiff/geodiff  }
+          exec { cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake  -DENABLE_TESTS=ON  -DWITH_POSTGRESQL=FALSE ../geodiff/geodiff  }
           exec { cmake --build . --config Release }
 
       - name: build mergin-cpp-client
@@ -83,7 +83,7 @@ jobs:
           copy mergin-cpp-client\scripts\ci\config.pri mergin-cpp-client\src\config.pri
           mkdir build-mergin-cpp-client
           cd build-mergin-cpp-client
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64
           qmake ..\mergin-cpp-client\src\client.pro CONFIG+=release CONFIG+=static
           nmake release
 
@@ -96,7 +96,7 @@ jobs:
           copy ..\build-geodiff\Release\geodiff.dll geodiff.dll
           copy "C:\Program Files\OpenSSL\bin\libcrypto-1_1-x64.dll" libcrypto-1_1-x64.dll
           copy "C:\Program Files\OpenSSL\bin\libssl-1_1-x64.dll" libssl-1_1-x64.dll
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x86
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" -arch=x64
           windeployqt --release mergin.exe
           dir
 

@@ -16,7 +16,7 @@ concurrency:
 jobs:
   macos_build:
     if: ( github.repository == 'MerginMaps/mergin-cpp-client' )
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout mergin-cpp-client
         uses: actions/checkout@v2

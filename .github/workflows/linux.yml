@@ -76,6 +76,7 @@ jobs:
           cd build-mergin-cpp-client
 
           $Qt5_DIR/bin/qmake \
+            'QMAKE_CFLAGS_ISYSTEM=-I' \
             ../mergin-cpp-client/src/client.pro \
             CONFIG+=debug
 
