@@ -2,7 +2,7 @@ name: Code Layout
 on: [push]
 jobs:
   code_style:
-    if: ( github.repository == 'lutraconsulting/mergin-cpp-client' )
+    if: ( github.repository == 'MerginMaps/mergin-cpp-client' )
     runs-on: ubuntu-latest
     steps:
       - name: Install astyle

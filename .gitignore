@@ -1,6 +1,9 @@
 src/config.pri
 src/client.pro.user
 
+*build*
+.qmake.stash
+
 # Prerequisites
 *.d
 

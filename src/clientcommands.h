@@ -26,7 +26,10 @@ class ClientCommands: public QObject
 
     void create( const QString &projectNamespace, const QString &projectName );
     void remove( const QString &projectNamespace, const QString &projectName );
-    void download( const QString &projectNamespace, const QString &projectName );
+    // initial download or pull
+    void pull( const QString &projectNamespace, const QString &projectName );
+    // pull + push
+    void push( const QString &projectNamespace, const QString &projectName );
     void sync( );
     void info( bool isJsonFormat );
 

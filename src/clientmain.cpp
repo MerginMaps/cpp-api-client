@@ -182,7 +182,7 @@ int main( int argc, char *argv[] )
     else if ( args.command == "download" )
     {
       cmd.login( args.url, args.user, args.pass );
-      cmd.download( args.projectNamespace, args.projectName );
+      cmd.pull( args.projectNamespace, args.projectName );
     }
     else if ( args.command == "sync" )
     {
