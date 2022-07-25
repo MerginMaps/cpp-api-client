@@ -25,7 +25,7 @@ Options:
   --version   Show the version information.
   --username  Mergin username (or MERGIN_USERNAME env. variable)
   --password  Mergin password (or MERGIN_PASSWORD env. variable)
-  --url       Mergin url      (defaults to public.cloudmergin.com)
+  --url       Mergin url      (defaults to app.merginmaps.com)
 
 Commands:
   create         Create a new project on Mergin server
