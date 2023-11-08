@@ -1,7 +1,7 @@
-[![Code Layout](https://github.com/MerginMaps/mergin-cpp-client/workflows/Code%20Layout/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions?query=workflow%3A%22Code+Layout%22)
-[![Linux Build](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/linux.yml/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/linux.yml)
-[![Windows Build](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/windows.yml/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/windows.yml)
-[![macOS Build](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/macos.yml/badge.svg)](https://github.com/MerginMaps/mergin-cpp-client/actions/workflows/macos.yml)
+[![Code Layout](https://github.com/MerginMaps/cpp-api-client/workflows/Code%20Layout/badge.svg)](https://github.com/MerginMaps/cpp-api-client/actions?query=workflow%3A%22Code+Layout%22)
+[![Linux Build](https://github.com/MerginMaps/cpp-api-client/actions/workflows/linux.yml/badge.svg)](https://github.com/MerginMaps/cpp-api-client/actions/workflows/linux.yml)
+[![Windows Build](https://github.com/MerginMaps/cpp-api-client/actions/workflows/windows.yml/badge.svg)](https://github.com/MerginMaps/cpp-api-client/actions/workflows/windows.yml)
+[![macOS Build](https://github.com/MerginMaps/cpp-api-client/actions/workflows/macos.yml/badge.svg)](https://github.com/MerginMaps/cpp-api-client/actions/workflows/macos.yml)
 
 # Mergin Maps Cpp Client
 
@@ -10,7 +10,7 @@ service and a command-line tool for easy access to data stored in Mergin Maps.
 
 <div><img align="left" width="45" height="45" src="https://raw.githubusercontent.com/MerginMaps/docs/main/src/.vuepress/public/slack.svg"><a href="https://merginmaps.com/community/join">Join our community chat</a><br/>and ask questions!</div><br />
 
-Note: Check also [Mergin Maps Python Client](https://github.com/MerginMaps/mergin-py-client)
+Note: Check also [Mergin Maps Python Client](https://github.com/MerginMaps/python-api-client)
 
 ## Command-line Tool
 
